@@ -81,6 +81,7 @@ static void setobjopt_undo_dnat(struct nf_conntrack *ct)
 		ct->dnat.max_ip.v4 = ct->dnat.min_ip.v4;
 		ct->repl.src.v4 = ct->head.orig.dst.v4;
 		set_bit(ATTR_DNAT_IPV4, ct->head.set);
+		break;
 	case AF_INET6:
 		memcpy(&ct->dnat.min_ip.v6, &ct->repl.src.v6,
 		       sizeof(struct in6_addr));
@@ -143,10 +144,8 @@ int __setobjopt(struct nf_conntrack *ct, unsigned int option)
 
 static int getobjopt_is_snat(const struct nf_conntrack *ct)
 {
-	if (!(test_bit(ATTR_STATUS, ct->head.set)))
-		return 0;
-
-	if (!(ct->status & IPS_SRC_NAT_DONE))
+	if (test_bit(ATTR_STATUS, ct->head.set) &&
+	    !(ct->status & IPS_SRC_NAT_DONE))
 		return 0;
 
 	switch (ct->head.orig.l3protonum) {
@@ -165,10 +164,8 @@ static int getobjopt_is_snat(const struct nf_conntrack *ct)
 
 static int getobjopt_is_dnat(const struct nf_conntrack *ct)
 {
-	if (!(test_bit(ATTR_STATUS, ct->head.set)))
-		return 0;
-
-	if (!(ct->status & IPS_DST_NAT_DONE))
+	if (test_bit(ATTR_STATUS, ct->head.set) &&
+	    !(ct->status & IPS_DST_NAT_DONE))
 		return 0;
 
 	switch (ct->head.orig.l3protonum) {

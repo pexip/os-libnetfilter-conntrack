@@ -1,3 +1,12 @@
+libnetfilter-conntrack (1.0.7-1) unstable; urgency=medium
+
+  * [52b69a5] d/control: move package to pkg-netfilter team
+  * [670ea9b] New upstream version 1.0.7
+  * [29c7615] d/control: use salsa git service
+  * [3beadd2] dbgsym: drop old -dbg binary package
+
+ -- Arturo Borrero Gonzalez <arturo@debian.org>  Tue, 01 May 2018 12:33:53 +0200
+
 libnetfilter-conntrack (1.0.6-2) unstable; urgency=medium
 
   * [07af40b] d/control: update Arturo's email address
