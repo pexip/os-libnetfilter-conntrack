@@ -1,3 +1,9 @@
+libnetfilter-conntrack (1.0.6-2pexip1) pexip; urgency=medium
+
+  * Prepare Pexip packaging
+
+ -- John-Mark Bell <jmb@pexip.com>  Fri, 03 Aug 2018 14:53:01 +0000
+
 libnetfilter-conntrack (1.0.6-2) unstable; urgency=medium
 
   * [07af40b] d/control: update Arturo's email address
