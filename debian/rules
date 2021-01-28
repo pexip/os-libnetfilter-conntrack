@@ -1,11 +1,9 @@
 #!/usr/bin/make -f
+export DH_VERBOSE=1
+
 %:
-	dh $@  --with autoreconf
+	dh $@
 
-override_dh_strip:
-	dh_strip --dbgsym-migration='libnetfilter-conntrack3-dbg (<< 1.0.6-2~)'
-
-override_dh_installdocs:
-	        dh_installdocs --link-doc=libnetfilter-conntrack3
-
-
+override_dh_auto_build:
+	dh_auto_build
+	doxygen doxygen.cfg
