@@ -1,3 +1,9 @@
+libnetfilter-conntrack (1.0.8-3pexip1) pexip; urgency=medium
+
+  * Initial bullseye build
+
+ -- Mark Hymers <mark.hymers@pexip.com>  Thu, 02 Jun 2022 14:42:27 +0100
+
 libnetfilter-conntrack (1.0.8-3) unstable; urgency=medium
 
   * New source-only upload to unstable to allow testing migration.
