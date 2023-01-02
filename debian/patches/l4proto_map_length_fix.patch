@@ -1,0 +1,39 @@
+Description: increase the length of `l4proto_map`
+ .
+ With addition of MPTCP `IPPROTO_MAX` is greater than 256, so the
+ array needs to be extended to account for the new upper bound.
+Forwarded: https://lore.kernel.org/netfilter-devel/20221223123806.2685611-1-jeremy@azazel.net/
+Author: Jeremy Sowden <jeremy@azazel.net>
+Last-Update: 2022-12-23
+
+--- a/include/internal/object.h
++++ b/include/internal/object.h
+@@ -6,6 +6,7 @@
+ #ifndef _NFCT_OBJECT_H_
+ #define _NFCT_OBJECT_H_
+ 
++#include <internal/bitops.h>
+ #include <libnetfilter_conntrack/libnetfilter_conntrack.h>
+ 
+ /*
+@@ -223,12 +224,13 @@ struct nfct_filter {
+ 	enum nfct_filter_logic 	logic[NFCT_FILTER_MAX];
+ 
+ 	/*
+-	 * This the layer 4 protocol map for filtering. Not more than 
+-	 * 255 protocols (maximum is IPPROTO_MAX which is 256). Actually,
+-	 * I doubt that anyone can reach such a limit.
++	 * This the layer 4 protocol map for filtering. Not more than 255
++	 * protocols.  Although IPPROTO_MAX is currently 263, there are many
++	 * fewer protocols defined in netinet/in.h, so no one should reach this
++	 * limit.
+ 	 */
+ #define __FILTER_L4PROTO_MAX	255
+-	uint32_t 		l4proto_map[IPPROTO_MAX/32];
++	uint32_t 		l4proto_map[DIV_ROUND_UP(IPPROTO_MAX, 32)];
+ 	uint32_t		l4proto_len;
+ 
+ 	struct {
+-- 
+2.35.1
+
