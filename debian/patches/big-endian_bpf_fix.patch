@@ -1,0 +1,40 @@
+Description: fix BPF code for filtering on big-endian architectures.
+ .
+ The BPF for checking the subsystem ID looks for it in the righthand byte of
+ `nlh->nlmsg_type`.  However, it will only be there on little-endian archi-
+ tectures.  The result is that on big-endian architectures the subsystem ID
+ doesn't match, all packets are immediately accepted, and all filters are
+ ignored.
+Forwarded: https://lore.kernel.org/netfilter-devel/20221223162441.2692988-1-jeremy@azazel.net/
+Author: Jeremy Sowden <jeremy@azazel.net>
+Last-Update: 2022-12-23
+
+--- a/src/conntrack/bsf.c
++++ b/src/conntrack/bsf.c
+@@ -9,6 +9,7 @@
+ 
+ #include "internal/internal.h"
+ #include "internal/stack.h"
++#include <endian.h>
+ #include <linux/filter.h>
+ #include <stddef.h>		/* offsetof */
+ 
+@@ -301,10 +302,14 @@ bsf_cmp_subsys(struct sock_filter *this, int pos, uint8_t subsys)
+ 		[1] = {
+ 			/* A = skb->data[X+k:B] (subsys_id) */
+ 			.code	= BPF_LD|BPF_B|BPF_IND,
++#if BYTE_ORDER == BIG_ENDIAN
++			.k	= 0,
++#else
+ 			.k	= sizeof(uint8_t),
++#endif
+ 		},
+ 		[2] = {
+-			/* A == subsys ? jump +1 : accept */
++			/* A == subsys ? jump + 1 : accept */
+ 			.code	= BPF_JMP|BPF_JEQ|BPF_K,
+ 			.k	= subsys,
+ 			.jt	= 1,
+-- 
+2.35.1
+

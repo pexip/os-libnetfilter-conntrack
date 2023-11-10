@@ -1,0 +1,18 @@
+Document: libnetfilter-conntrack-dev
+Title: The libnetfilter-conntrack API Documentation
+Author: Pablo Neira Ayuso
+Abstract: libnetfilter_conntrack is a userspace library providing a programming
+ interface (API) to the in-kernel connection tracking state table. The library
+ libnetfilter_conntrack has been previously known as libnfnetlink_conntrack and
+ libctnetlink. This library is currently used by conntrack-tools among many
+ other applications.
+ .
+ To write your own program using libnetfilter_conntrack, you should start by
+ reading the doxygen documentation (start by LibrarySetup page) and check
+ examples available under utils/ in the libnetfilter_conntrack source code
+ tree. You can compile these examples by invoking 'make check'.
+Section: Programming/C
+
+Format: HTML
+Index: /usr/share/doc/libnetfilter-conntrack-dev/html/index.html
+Files: /usr/share/doc/libnetfilter-conntrack-dev/html/*

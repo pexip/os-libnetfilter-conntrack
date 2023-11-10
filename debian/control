@@ -8,11 +8,12 @@ XSBC-Pexip-Original-Uploaders: Alexander Wirt <formorer@debian.org>,
            Jeremy Sowden <jeremy@azazel.net>
 Build-Depends: debhelper-compat (= 13),
                doxygen,
-               libmnl-dev (>= 1.0.3),
-               libnfnetlink-dev (>= 1.0.0),
+               graphviz,
+               libmnl-dev,
+               libnfnetlink-dev,
                libtool,
                pkg-config
-Standards-Version: 4.5.1
+Standards-Version: 4.6.2
 Rules-Requires-Root: no
 Homepage: https://www.netfilter.org/projects/libnetfilter_conntrack/
 Vcs-Git: https://salsa.debian.org/pkg-netfilter-team/pkg-libnetfilter-conntrack.git
@@ -20,7 +21,7 @@ Vcs-Browser: https://salsa.debian.org/pkg-netfilter-team/pkg-libnetfilter-conntr
 XS-Pexip-Upstream: http://deb.debian.org/debian/ bookworm
 
 Package: libnetfilter-conntrack3
-Architecture: any
+Architecture: linux-any
 Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
 Depends: ${misc:Depends}, ${shlibs:Depends}
@@ -30,10 +31,11 @@ Description: Netfilter netlink-conntrack library
 
 Package: libnetfilter-conntrack-dev
 Section: libdevel
-Architecture: any
+Architecture: linux-any
 Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
 Depends: libnetfilter-conntrack3 (= ${binary:Version}),
-         libnfnetlink-dev (>= 1.0.0),
+         libnfnetlink-dev,
          pkg-config,
          ${misc:Depends}
 Suggests: libnetfilter-conntrack-doc (= ${binary:Version})
@@ -46,6 +48,8 @@ Description: Development files for libnetfilter-conntrack3
 Package: libnetfilter-conntrack-doc
 Section: doc
 Architecture: all
+Multi-Arch: foreign
+Pre-Depends: ${misc:Pre-Depends}
 Depends: ${misc:Depends}
 Description: Documentation files for libnetfilter-conntrack3
  libnetfilter_conntrack is a userspace library providing a programming

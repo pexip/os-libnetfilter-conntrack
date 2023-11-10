@@ -1,3 +1,65 @@
+libnetfilter-conntrack (1.0.9-3) unstable; urgency=medium
+
+  * [44c4074] d/gbp.conf: buildpackage: set `pristine-tar` to `false`
+  * [87333e7] d/rules: revert "export dpkg build-flags" since debhelper
+    manages them
+  * [f8833b6] d/control: bump Standards-Version to 4.6.2
+  * [1578d88] d/patches: rename patch
+  * [aab4027] d/patches: add patch to correct size of array
+  * [0e5055d] d/patches: add patch to fix endianness bug in filters
+    (Closes: #896716)
+
+ -- Jeremy Sowden <jeremy@azazel.net>  Mon, 02 Jan 2023 21:41:02 +0000
+
+libnetfilter-conntrack (1.0.9-2) unstable; urgency=medium
+
+  * [3ea7497] d/control: add b-dep on graphviz
+  * [1e91ec2] d/patches: add patch to disable broken test
+  * [09b8b5a] d/gbp.conf: enable pristine-tar for buildpackage
+  * [ed6ccd2] d/gbp.conf: add dch commit-msg
+  * [9e78098] d/: add doc-base file for -doc package
+  * [b6845c1] d/: add upstream signing key
+  * [08ef9ec] d/watch: bump version
+  * [f5a31e3] d/watch: use HTTPS URL
+  * [61bcd75] d/watch: check upstream sigs
+  * [d496a28] d/rules: enable hardening
+  * [d379d21] d/libnetfilter-conntrack3.symbols: add `Build-Depends-Package`
+    field
+  * [65877d8] d/patches/01-disable_test.patch: add metadata
+  * [0df5903] d/control: use `linux-any` for arch-specific packages
+  * [ce5e271] d/control: add `${misc:Pre-Depends}` to -dev and -doc
+  * [21bf8bb] d/gbp.conf: sort sections
+  * [4d537f4] d/rules: export dpkg build-flags
+
+ -- Jeremy Sowden <jeremy@azazel.net>  Sat, 09 Apr 2022 15:19:46 +0100
+
+libnetfilter-conntrack (1.0.9-1) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * [82180b7] Remove constraints unnecessary since buster
+
+  [ Jeremy Sowden ]
+  * [e2eca4e] d/control: bump Standards-Version to 4.6.0
+  * [c81bb37] d/control: mark -doc `multi-arch: foreign`
+  * [b5443fd] New upstream version 1.0.9
+    + New nfct_nlmsg_build_filter() function that allows one to add metadata
+      for kernel-side filtering of conntrack entries during conntrack table
+      dump.
+    + The nfct_query() API supports the new NFCT_Q_FLUSH_FILTER argument, it
+      allows one to flush only ipv4 or ipv6 entries from the connection
+      tracking table.
+    + nfct_snprint family of functions have been updated.
+    + SCTP conntrack entries now support 'heartbeat sent/acked' state.
+    + Entries offloaded to hardware include '[HW_OFFLOAD]' in the formatted
+      output string.
+    + nfct_nlmsg_build() did not work for ICMP flows unless all ICMP attributes
+      were set in the reply tuple too, this affected the 'conntrack' tool where
+      updates (e.g. setting the conntrack mark to a different value) of ICMP
+      flows would not work.
+  * [91e2b3e] d/libnetfilter-conntrack3.symbols: add new symbols
+
+ -- Jeremy Sowden <jeremy@azazel.net>  Mon, 14 Feb 2022 22:11:11 +0000
+
 libnetfilter-conntrack (1.0.8-3pexip3) pexip-bullseye; urgency=medium
 
   * Bullseye rebuild for ARM64 inclusion
