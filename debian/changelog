@@ -1,3 +1,9 @@
+libnetfilter-conntrack (1.0.9-3pexip1) pexip-bookworm; urgency=medium
+
+  * Initial bookworm build
+
+ -- Mark Hymers <mark.hymers@pexip.com>  Thu, 16 Nov 2023 10:07:07 +0000
+
 libnetfilter-conntrack (1.0.9-3) unstable; urgency=medium
 
   * [44c4074] d/gbp.conf: buildpackage: set `pristine-tar` to `false`
