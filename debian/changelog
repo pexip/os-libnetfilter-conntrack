@@ -1,3 +1,56 @@
+libnetfilter-conntrack (1.1.0-1) unstable; urgency=medium
+
+  [ Jeremy Sowden ]
+  * [3148983] New upstream version 1.1.0
+    - Enhancements for filtering dump and flush commands,
+      see struct nfct_filter_dump and nfct_nlmsg_build_filter().
+    - ctnetlink event BPF fixes (endianness issue, IPv6 matching) and
+      enhancements (zone matching).
+    - fix for musl compilation.
+  * [e89dc63] d/watch: use special strings in URL
+  * [36521b3] d/control: update my e-mail address
+  * [33b9c17] d/control: remove Alexander Wirt from uploaders.
+    Thanks to Formorer for his contributions
+  * [0c2b44a] d/control: bump Standards-Version to 4.7.0
+  * [beb978d] d/control: replace pkg-config dependencies with pkgconf
+  * [f5b3d77] d/gbp.conf: DEFAULT: enable `pristine-tar`
+  * [b1a3522] d/patches: drop upstreamed patches
+  * [fe7a695] d/s/lintian-overrides: remove no longer needed override
+  * [d2b60a1] d/libnetfilter-conntrack3.symbols: add new symbols
+
+ -- Jeremy Sowden <azazel@debian.org>  Wed, 25 Sep 2024 20:37:55 +0100
+
+libnetfilter-conntrack (1.0.9-6) unstable; urgency=medium
+
+  * [7b16e0b] d/rules: support `terse` build option
+  * [29166ff] d/patches: add fix for filtering ipv6 addresses (Closes: #690676)
+  * [f52dcbd] d/s/lintian-overrides: ignore warning about lack of signature for
+    1.0.9 orig tar-ball
+
+ -- Jeremy Sowden <jeremy@azazel.net>  Tue, 10 Oct 2023 18:14:53 +0100
+
+libnetfilter-conntrack (1.0.9-5) unstable; urgency=medium
+
+  * [dc697ca] d/rules: clean generated doc's (Closes: #1048802)
+  * [371dc03] d/gbp.conf: DEFAULT: update `debian-branch`
+
+ -- Jeremy Sowden <jeremy@azazel.net>  Mon, 14 Aug 2023 20:48:02 +0100
+
+libnetfilter-conntrack (1.0.9-4) unstable; urgency=medium
+
+  [ Jeremy Sowden ]
+  * [18ecdd5] d/control: use tracker.d.o address for `Maintainer:`
+
+  [ Simon McVittie ]
+  * [da57dc7] d/control, d/rules: Only build API documentation if we need it
+    (Closes: #1043268)
+
+  [ Jeremy Sowden ]
+  * [f0617d3] d/control, d/rules: add `nodoc` build-profile support
+  * [9aee291] d/gbp.conf: dch: update `commit-msg`
+
+ -- Jeremy Sowden <jeremy@azazel.net>  Tue, 08 Aug 2023 13:42:37 +0100
+
 libnetfilter-conntrack (1.0.9-3) unstable; urgency=medium
 
   * [44c4074] d/gbp.conf: buildpackage: set `pristine-tar` to `false`

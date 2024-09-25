@@ -1,11 +1,24 @@
 #!/usr/bin/make -f
-export DH_VERBOSE=1
+
+ifeq (,$(filter terse,$(DEB_BUILD_OPTIONS)))
+export DH_VERBOSE = 1
+configure_opts = --disable-silent-rules
+else
+configure_opts = --enable-silent-rules
+endif
 
 export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 
 %:
 	dh $@
 
-override_dh_auto_build:
-	dh_auto_build
+override_dh_auto_configure:
+	dh_auto_configure -- $(configure_opts)
+
+ifeq (,$(filter nodoc,$(DEB_BUILD_OPTIONS)))
+execute_after_dh_auto_clean-indep:
+	rm -fr doxygen
+
+execute_after_dh_auto_build-indep:
 	doxygen doxygen.cfg
+endif
